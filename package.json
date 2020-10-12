@@ -2,7 +2,7 @@
   "name": "express-mesto",
   "version": "1.0.0",
   "description": "`/public` — статика, полученная в результате билда фронтенд-приложения на Реакте  \r `/data` — JSON-файлы для временной эмуляции работы с базой данных  \r `/routes` — папка с файлами роутера",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
@@ -15,7 +15,7 @@
     "url": "git+https://github.com/dimexx87/express-mesto.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Gibadullin Dmitriy, student of Yandex.Praktikum",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/dimexx87/express-mesto/issues"
