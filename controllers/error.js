@@ -1,5 +1,3 @@
-const getError = (req, res) => {
-  return res.status(404).send({ message: "Запрашиваемый ресурс не найден" })
-}
+const getError = (req, res) => res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
 
-module.exports = getError
+module.exports = getError;
