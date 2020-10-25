@@ -1,29 +1,49 @@
-const path = require('path');
-const readFile = require('../utils/read-file');
+const User = require('../models/user');
+const {
+  OK_CODE,
+  CREATE_CODE,
+  INPUT_ERROR_CODE,
+  NOTFOUND_ERROR_CODE,
+  ERROR_CODE,
+} = require('../utils/constants');
 
-const jsonDataPath = path.join(__dirname, '..', 'data', 'users.json');
-
-const getUsers = (req, res) => {
-  readFile(jsonDataPath).then((data) => res.send(data));
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.status(OK_CODE).send(users);
+  } catch (err) {
+    res.status(ERROR_CODE).send({ message: `На сервере произошла ошибка ${err}` });
+  }
 };
 
-const getUser = (req, res) => {
-  const { id } = req.params;
-  readFile(jsonDataPath)
-    .then((data) => {
-      const userToFind = data.find((user) => user._id === id);
-      return userToFind;
-    })
-    .then((user) => {
-      if (!user) {
-        return res.status(404).send({ message: 'Нет пользователя с таким id' });
-      }
-      res.send(user);
-      return user;
-    });
+const getUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = await User.findOne({ _id: userId });
+    if (!user) {
+      res.status(NOTFOUND_ERROR_CODE).send({ message: 'Ошибка. Нет пользователя с таким id' });
+    }
+    res.status(OK_CODE).send(user);
+  } catch (err) {
+    res.status(ERROR_CODE).send({ message: `На сервере произошла ошибка ${err}` });
+  }
+};
+
+const createUser = async (req, res) => {
+  try {
+    const { name, about, avatar } = req.body;
+    const user = await User.create({ name, about, avatar });
+    res.status(CREATE_CODE).send({ data: user });
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(INPUT_ERROR_CODE).send({ message: `Ошибка. Переданы некорректные данные ${err}` });
+    }
+    res.status(ERROR_CODE).send({ message: `На сервере произошла ошибка ${err}` });
+  }
 };
 
 module.exports = {
   getUsers,
   getUser,
+  createUser,
 };
