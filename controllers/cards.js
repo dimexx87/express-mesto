@@ -12,7 +12,7 @@ const getCards = async (req, res) => {
     const cards = await Card.find({});
     res.status(OK_CODE).send(cards);
   } catch (err) {
-    res.status(ERROR_CODE).send({ message: `На сервере произошла ошибка ${err}` });
+    res.status(ERROR_CODE).send({ message: `На сервере произошла ошибка!gig ${err}` });
   }
 };
 
