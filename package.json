@@ -1,7 +1,7 @@
 {
   "name": "express-mesto",
   "version": "1.0.0",
-  "description": "`/public` — статика, полученная в результате билда фронтенд-приложения на Реакте  \r `/data` — JSON-файлы для временной эмуляции работы с базой данных  \r `/routes` — папка с файлами роутера",
+  "description": "проектная работа YP #13:реализация REST API проекта `Место` и связывание его с базой данных MongoDB с помощью Mongoose",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -27,15 +27,8 @@
   },
   "devDependencies": {
     "eslint": "^7.11.0",
-    "eslint-config-airbnb": "^18.2.0",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-config-prettier": "^6.12.0",
-    "eslint-plugin-html": "^6.1.0",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.21.4",
-    "nodemon": "^2.0.4",
-    "prettier": "^2.1.2"
+    "nodemon": "^2.0.4"
   }
 }

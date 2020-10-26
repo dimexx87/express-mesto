@@ -2,7 +2,6 @@ const express = require('express');
 
 const app = express();
 const { PORT = 3000 } = process.env;
-const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const rootRoutes = require('./routes/root');
@@ -17,8 +16,6 @@ const mongoConnectOptions = {
 mongoose.connect(mongoDbUrl, mongoConnectOptions);
 
 app.use(bodyParser.json());
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
   req.user = {
