@@ -43,8 +43,40 @@ const deleteCard = async (req, res) => {
   }
 };
 
+const likeCard = async (req, res) => {
+  try {
+    const { cardId } = req.params;
+    const { _id } = req.user;
+    const card = await Card.findOneAndUpdate(cardId, { $addToSet: { likes: _id } },
+      { new: true }).populate('likes');
+    if (!card) {
+      res.status(NOTFOUND_ERROR_CODE).send({ message: 'Ошибка. Нет карточки с таким id' });
+    }
+    res.status(OK_CODE).send(card);
+  } catch (err) {
+    res.status(ERROR_CODE).send({ message: `На сервере произошла ошибка ${err}` });
+  }
+};
+
+const dislikeCard = async (req, res) => {
+  try {
+    const { cardId } = req.params;
+    const { _id } = req.user;
+    const card = await Card.findByIdAndUpdate(cardId, { $pull: { likes: _id } },
+      { new: true });
+    if (!card) {
+      res.status(NOTFOUND_ERROR_CODE).send({ message: 'Ошибка. Нет карточки с таким id' });
+    }
+    res.status(OK_CODE).send(card);
+  } catch (err) {
+    res.status(ERROR_CODE).send({ message: `На сервере произошла ошибка ${err}` });
+  }
+};
+
 module.exports = {
   getCards,
   createCard,
   deleteCard,
+  likeCard,
+  dislikeCard,
 };
