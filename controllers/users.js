@@ -5,6 +5,7 @@ const {
   INPUT_ERROR_CODE,
   NOTFOUND_ERROR_CODE,
   ERROR_CODE,
+  myId,
 } = require('../utils/constants');
 
 const getUsers = async (req, res) => {
@@ -42,8 +43,42 @@ const createUser = async (req, res) => {
   }
 };
 
+const updateUser = async (req, res) => {
+  try {
+    const { name, about } = req.body;
+    const user = await User.findByIdAndUpdate(myId, { name, about }, {
+      new: true,
+      runValidators: true,
+    });
+    res.status(CREATE_CODE).send({ data: user });
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(INPUT_ERROR_CODE).send({ message: `Ошибка. Переданы некорректные данные ${err}` });
+    }
+    res.status(ERROR_CODE).send({ message: `На сервере произошла ошибка ${err}` });
+  }
+};
+
+const updateAvatar = async (req, res) => {
+  try {
+    const { avatar } = req.body;
+    const user = await User.findByIdAndUpdate(myId, { avatar }, {
+      new: true,
+      runValidators: true,
+    });
+    res.status(CREATE_CODE).send({ data: user });
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(INPUT_ERROR_CODE).send({ message: `Ошибка. Переданы некорректные данные ${err}` });
+    }
+    res.status(ERROR_CODE).send({ message: `На сервере произошла ошибка ${err}` });
+  }
+};
+
 module.exports = {
   getUsers,
   getUser,
   createUser,
+  updateUser,
+  updateAvatar,
 };

@@ -5,6 +5,7 @@ const { PORT = 3000 } = process.env;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const rootRoutes = require('./routes/root');
+const { myId } = require('./utils/constants');
 
 const mongoDbUrl = 'mongodb://localhost:27017/mestodb';
 const mongoConnectOptions = {
@@ -19,7 +20,7 @@ app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   req.user = {
-    _id: '5f9544ce3d59d53c84f91187',
+    _id: myId,
   };
   next();
 });

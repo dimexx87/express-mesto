@@ -3,6 +3,7 @@ const CREATE_CODE = 201;
 const INPUT_ERROR_CODE = 400;
 const NOTFOUND_ERROR_CODE = 404;
 const ERROR_CODE = 500;
+const myId = '5f9544ce3d59d53c84f91187';
 
 module.exports = {
   OK_CODE,
@@ -10,4 +11,5 @@ module.exports = {
   INPUT_ERROR_CODE,
   NOTFOUND_ERROR_CODE,
   ERROR_CODE,
+  myId,
 };
