@@ -47,7 +47,7 @@ const likeCard = async (req, res) => {
   try {
     const { cardId } = req.params;
     const { _id } = req.user;
-    const card = await Card.findOneAndUpdate(cardId, { $addToSet: { likes: _id } },
+    const card = await Card.findByIdAndUpdate(cardId, { $addToSet: { likes: _id } },
       { new: true }).populate('likes');
     if (!card) {
       res.status(NOTFOUND_ERROR_CODE).send({ message: 'Ошибка. Нет карточки с таким id' });
